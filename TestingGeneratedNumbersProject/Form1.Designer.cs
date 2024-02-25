@@ -45,11 +45,15 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.noRangeCheckBox = new System.Windows.Forms.CheckBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.wblButton = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.expnButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // uniDistButton
             // 
-            this.uniDistButton.Location = new System.Drawing.Point(12, 168);
+            this.uniDistButton.Location = new System.Drawing.Point(280, 95);
             this.uniDistButton.Name = "uniDistButton";
             this.uniDistButton.Size = new System.Drawing.Size(124, 43);
             this.uniDistButton.TabIndex = 0;
@@ -59,7 +63,7 @@
             // 
             // trianDistButton
             // 
-            this.trianDistButton.Location = new System.Drawing.Point(160, 168);
+            this.trianDistButton.Location = new System.Drawing.Point(410, 95);
             this.trianDistButton.Name = "trianDistButton";
             this.trianDistButton.Size = new System.Drawing.Size(124, 43);
             this.trianDistButton.TabIndex = 1;
@@ -83,14 +87,14 @@
             // 
             // genNumTextBox
             // 
-            this.genNumTextBox.Location = new System.Drawing.Point(314, 139);
+            this.genNumTextBox.Location = new System.Drawing.Point(15, 243);
             this.genNumTextBox.Name = "genNumTextBox";
             this.genNumTextBox.Size = new System.Drawing.Size(330, 20);
             this.genNumTextBox.TabIndex = 4;
             // 
             // compCostTextBox
             // 
-            this.compCostTextBox.Location = new System.Drawing.Point(314, 191);
+            this.compCostTextBox.Location = new System.Drawing.Point(363, 243);
             this.compCostTextBox.Name = "compCostTextBox";
             this.compCostTextBox.Size = new System.Drawing.Size(330, 20);
             this.compCostTextBox.TabIndex = 5;
@@ -149,7 +153,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(311, 123);
+            this.label3.Location = new System.Drawing.Point(12, 227);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(97, 13);
             this.label3.TabIndex = 11;
@@ -158,7 +162,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(311, 175);
+            this.label4.Location = new System.Drawing.Point(360, 227);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(98, 13);
             this.label4.TabIndex = 12;
@@ -167,7 +171,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 152);
+            this.label5.Location = new System.Drawing.Point(280, 79);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(98, 13);
             this.label5.TabIndex = 13;
@@ -176,7 +180,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(157, 152);
+            this.label6.Location = new System.Drawing.Point(407, 79);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(109, 13);
             this.label6.TabIndex = 14;
@@ -193,12 +197,54 @@
             this.noRangeCheckBox.UseVisualStyleBackColor = true;
             this.noRangeCheckBox.CheckedChanged += new System.EventHandler(this.noRangeCheckBox_CheckedChanged);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(280, 142);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(97, 13);
+            this.label7.TabIndex = 17;
+            this.label7.Text = "Weibull Distribution";
+            // 
+            // wblButton
+            // 
+            this.wblButton.Location = new System.Drawing.Point(280, 158);
+            this.wblButton.Name = "wblButton";
+            this.wblButton.Size = new System.Drawing.Size(124, 43);
+            this.wblButton.TabIndex = 16;
+            this.wblButton.Text = "Generate Number";
+            this.wblButton.UseVisualStyleBackColor = true;
+            this.wblButton.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(540, 79);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(120, 13);
+            this.label8.TabIndex = 19;
+            this.label8.Text = " Exponential Distribution";
+            // 
+            // expnButton
+            // 
+            this.expnButton.Location = new System.Drawing.Point(540, 95);
+            this.expnButton.Name = "expnButton";
+            this.expnButton.Size = new System.Drawing.Size(124, 43);
+            this.expnButton.TabIndex = 18;
+            this.expnButton.Text = "Generate Number";
+            this.expnButton.UseVisualStyleBackColor = true;
+            this.expnButton.Click += new System.EventHandler(this.expnButton_Click);
+            // 
             // NumTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(726, 291);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.expnButton);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.wblButton);
             this.Controls.Add(this.noRangeCheckBox);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -242,6 +288,10 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox noRangeCheckBox;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button wblButton;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button expnButton;
     }
 }
 

@@ -241,5 +241,145 @@ namespace TestingGeneratedNumbersProject
         {
             GenerateRandomNumber();
         }
+
+        private void expnButton_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(minValTextBox.Text) || string.IsNullOrEmpty(maxValTextBox.Text))
+            {
+                MessageBox.Show("Please enter both minimum and maximum values.");
+                return;
+            }
+            else
+            {
+                rangeNumMin = long.Parse(minValTextBox.Text);
+                rangeNumMax = long.Parse(maxValTextBox.Text);
+            }
+
+            if (rangeNumMax < rangeNumMin)
+            {
+                MessageBox.Show("Max value must be greater than Min value.");
+                return;
+            }
+            Stopwatch sw = Stopwatch.StartNew();
+            if (!string.IsNullOrEmpty(genNumTextBox.Text) || !string.IsNullOrEmpty(compCostTextBox.Text))
+            {
+                genNumTextBox.Text = "";
+                compCostTextBox.Text = "";
+            }
+
+            decimal randomNumber = GenerateExponentialNumber(GetSelectedBits());
+
+            decimal scaledRandomNumber = rangeNumMin + (randomNumber * (rangeNumMax - rangeNumMin));
+            scaledRandomNumber = Math.Max(rangeNumMin, Math.Min(rangeNumMax, scaledRandomNumber));
+            int roundedInteger = (int)Math.Round(scaledRandomNumber);
+
+            sw.Stop();
+
+            genNumTextBox.Text += $"{roundedInteger}";
+            compCostTextBox.Text += $"Consumed Time = {sw.Elapsed}";
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(minValTextBox.Text) || string.IsNullOrEmpty(maxValTextBox.Text))
+            {
+                MessageBox.Show("Please enter both minimum and maximum values.");
+                return;
+            }
+
+            else
+            {
+                rangeNumMin = long.Parse(minValTextBox.Text);
+                rangeNumMax = long.Parse(maxValTextBox.Text);
+            }
+
+            if (rangeNumMax < rangeNumMin)
+            {
+                MessageBox.Show("Max value must be greater than Min value.");
+                return;
+            }
+            Stopwatch sw = Stopwatch.StartNew();
+
+            if (!string.IsNullOrEmpty(genNumTextBox.Text) || !string.IsNullOrEmpty(compCostTextBox.Text))
+            {
+                genNumTextBox.Text = "";
+                compCostTextBox.Text = "";
+            }
+
+            decimal randomNumber = 0;
+
+            randomNumber = GenerateWeibullNumber(GetSelectedBits());
+
+            decimal scaledRandomNumber = rangeNumMin + (randomNumber * (rangeNumMax - rangeNumMin));
+            scaledRandomNumber = Math.Max(rangeNumMin, Math.Min(rangeNumMax, scaledRandomNumber));
+            int roundedInteger = (int)Math.Round(scaledRandomNumber);
+
+            sw.Stop();
+
+            genNumTextBox.Text += $"{roundedInteger}";
+            compCostTextBox.Text += $"Consumed Time = {sw.Elapsed}";
+
+
+        }
+
+        decimal GenerateWeibullNumber(int bitCount)
+        {
+            decimal shapeParameter = 2.0m;
+            decimal scaleParameter = 1.5m;
+
+            // Adjust the scale parameter based on the selected bit count
+            decimal adjustedShape = shapeParameter * (decimal)Math.Pow(2, bitCount / 64.0);
+            decimal adjustedScale = scaleParameter * (decimal)Math.Pow(2, bitCount / 64.0);
+
+            // Create a Weibull distribution with adjusted parameters
+            var weibullDistribution = new Weibull((double)adjustedShape, (double)adjustedScale);
+
+            // Generate a random number between 0 and 1
+            Random random = new Random();
+            double randomValue = random.NextDouble();
+
+            // Map the random value to the specified range
+            decimal min = 0m;
+            decimal max = 1m;
+            decimal scaledRandomNumber = min + ((decimal)randomValue * (max - min));
+
+            return scaledRandomNumber;
+        }
+
+        decimal GenerateExponentialNumber(int bitCount)
+        {
+            decimal rateParameter = 1.0m;
+
+            // Adjust the rate parameter based on the selected bit count
+            decimal adjustedRate = rateParameter * (decimal)Math.Pow(2, bitCount / 64.0);
+
+            // Create an Exponential distribution with adjusted rate parameter
+            var exponentialDistribution = new Exponential((double)adjustedRate);
+
+            // Generate a random number from the Exponential distribution
+            double sample = exponentialDistribution.Sample();
+
+            // Map the sample to the range [0, 1] using a sigmoid function
+            double mappedSample = 1 / (1 + Math.Exp(-sample));
+
+            // Scale the mapped sample to fit within the range of decimal
+            return (decimal)mappedSample;
+        }
+        int GetSelectedBits()
+        { 
+            switch (byteN)
+            {
+                case 32:
+                    return 32;
+                case 64:
+                    return 64;
+                case 128:
+                    return 128;
+                default:
+                    return 0;
+            }
+
+        }
+
     }
 }
